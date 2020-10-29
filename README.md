@@ -1,2 +1,2 @@
-# wooglin-app
-The SPA portion of Wooglin -- placeholder repo.
+# Wooglin-app
+The Web-App Version of Wooglin.

@@ -1,0 +1,57 @@
+{% load static %}
+
+{% for sbsheet in sbsheets %}
+<div class="jumbotron">
+    <h1 class="sameline">{{ sbsheet.name }}</h1>
+    <button data-toggle="collapse" data-target="#sheet" class="btn btn-primary float-right sameline">
+        See more
+    </button>
+    <p>{{ sbsheet.description }}</p>
+    <div id="sheet" class="collapse">
+        <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content"></div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Sober Bro 1</th>
+                    <th scope="col">Sober Bro 2</th>
+                    <th scope="col">Sober Bro 3</th>
+                    <th scope="col">Sober Bro 4</th>
+                    <th scope="col">Sober Bro 5</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in sober_brothers%}
+                    {% if row.date < sbsheet.end_date %}
+                    <tr>
+                        <td>{{ row.date|date:"l, F dS, Y" }}</td>
+                        <td>{{ row.start_time }}</td>
+                        <td>{{ row.end_time }}</td>
+                        <td>{{ row.sb_1 }}</td>
+                        <td>{{ row.sb_2 }}</td>
+                        <td>{{ row.sb_3 }}</td>
+                        <td>{{ row.sb_4 }}</td>
+                        <td>{{ row.sb_5 }}</td>
+                        <td>
+                            <button id="create-book" class="btn btn-primary" type="button" name="button">
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endfor %}
+
+

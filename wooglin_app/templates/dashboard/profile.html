@@ -1,0 +1,73 @@
+{% load static %}
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-sm-10"><h1>{{name}}</h1></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"><!--left col-->
+            <div class="text-center">
+                <img src="{{ me.avatar }}"
+                     class="avatar rounded-circle img-thumbnail"
+                     alt="avatar"
+                     id="profile-image">
+            </div>
+            </hr><br>
+            <ul class="list-group">
+                <li class="list-group-item text-muted">More Information <i
+                        class="fa fa-dashboard fa-1x"></i>
+                </li>
+                <li class="list-group-item">
+                    <span class="pull-left"><strong>Member Score</strong></span>
+                    <img src="{% static 'icons/info-circle.svg' %}"
+                         data-toggle="tooltip"
+                         data-placement="top"
+                         title="Your membership score is calculated using your attendance data, GPA, and service hours. Higher is better."
+                         style="width:16px; height:16px;">
+                    <span class="hard_number">{{ me.member_score }}</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="pull-left"><strong>Chapters Attended</strong></span>
+                    <span class="hard_number">{{ me.present }}</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="pull-left"><strong>Roll Number</strong></span>
+                    <span class="hard_number">{{ me.rollnumber }}</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="pull-left"><strong>Abroad?</strong></span>
+                    <span class="hard_number">{{ me.abroad }}</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="pull-left"><strong>Inactive?</strong></span>
+                    <span class="hard_number">{{ me.inactive }}</span>
+                </li>
+            </ul>
+
+        </div><!--/col-3-->
+        <div class="col-sm-9">
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <hr>
+                    <form enctype="multipart/form-data" action="" method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label><h4>{{ field.label }}</h4></label>
+                                {{ field }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <button class="btn btn-lg btn-success" type="submit">
+                            <img src="{% static 'icons/check-circle.svg' %}"
+                                 style="width:16px; height16px;">
+                            Save
+                        </button>
+                    </form>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
