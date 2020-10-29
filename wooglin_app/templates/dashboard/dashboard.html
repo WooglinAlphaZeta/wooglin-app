@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    {% include 'dashboard/header.html' %}
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="dashboard-nav-bar">
+    <button type="button" id="sidebarCollapse" class="navbar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <a class="navbar-brand mr-auto" href="#">
+        <img id="wooglin-logo" src="{% static 'images/wooglin_logo.jpeg'%}"/>
+        <span id="wooglin-text">Wooglin</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <button class="btn btn-lg btn-secondary my-2 my-sm-0 ml-auto" style="margin-right: 6px;"><img
+                src="{% static 'icons/life-preserver.svg'%}">Help
+        </button>
+        <button class="btn btn-lg btn-danger my-2 my-sm-0">
+            <a class="log-out" href="{% url 'logout' %}">
+                <img src="{% static 'icons/box-arrow-in-right.svg'%}" style="padding-right:6px;">Log out
+            </a>
+        </button>
+    </div>
+</nav>
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar" class="fixed">
+        <div class="sidebar-header">
+            <a href="#">
+                <img src="{{ me.avatar }}" class="rounded-circle"
+                     style="height: 120px; width: 120px;"
+                     alt="Profile Image">
+                <h3 style="margin-top:15px;"> {{ me.name }}</h3>
+            </a>
+            <p> {{ me.position }}</p>
+        </div>
+        <ul class="nav list-unstyled components">
+            <p style="font-size:24px">Tools</p>
+            <li class="nav-item active" style="width:250px;">
+                <!--                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>-->
+                <!--                <ul class="nav collapse list-unstyled" id="homeSubmenu">-->
+                <!--                    <li class="nav-item">-->
+                <!--                        <a href="#home1" class="nav-link active" data-toggle="tab">Home 1</a>-->
+                <!--                    </li>-->
+                <!--                    <li class="nav-item">-->
+                <!--                        <a href="#home2" class="nav-link" data-toggle="tab">Home 2</a>-->
+                <!--                    </li>-->
+                <!--                    <li class="nav-item">-->
+                <!--                        <a href="#home3" class="nav-link" data-toggle="tab">Home 3</a>-->
+                <!--                    </li>-->
+                <!--                </ul>-->
+                <a href="#home1" class="nav-link" data-toggle="tab">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#profile" class="nav-link" data-toggle="tab">Profile</a>
+            </li>
+
+            <!-- TODO: Ensure that only specific people can see this. -->
+            <li class="nav-item">
+                <a href="#membership" class="nav-link" data-toggle="tab">Membership</a>
+            </li>
+            <li class="nav-item">
+                <a href="#directory" class="nav-link" data-toggle="tab">Directory</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#soberbros" class="nav-link" data-toggle="tab">Sober Bros</a>
+            </li>
+
+            <!--            <li class="nav-item">-->
+            <!--                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>-->
+            <!--                <ul class="collapse list-unstyled" id="pageSubmenu">-->
+            <!--                    <li class="nav-item">-->
+            <!--                        <a href="#">Page 1</a>-->
+            <!--                    </li>-->
+            <!--                    <li class="nav-item">-->
+            <!--                        <a href="#">Page 2</a>-->
+            <!--                    </li>-->
+            <!--                    <li class="nav-item">-->
+            <!--                        <a href="#">Page 3</a>-->
+            <!--                    </li>-->
+            <!--                </ul>-->
+            <!--            </li>-->
+            <li class="nav-item">
+                <a href="#constitution" class="nav-link" data-toggle="tab">Constitution</a>
+            </li>
+            <li class="nav-item">
+                <a href="#FAQ" class="nav-link" data-toggle="tab">FAQ</a>
+            </li>
+        </ul>
+
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+            </li>
+            <li>
+                <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content Holder -->
+    <div id="content">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="home1">
+                <h1>Home tab content ...</h1>
+            </div>
+            <div class="tab-pane fade" id="profile">
+                {% include 'dashboard/profile.html' %}
+            </div>
+            <div class="tab-pane fade" id="home3">
+                <h1>Messages tab content ...</h1>
+            </div>
+            <div class="tab-pane fade" id="constitution">
+                {% include 'dashboard/constitution.html' %}
+            </div>
+            <div class="tab-pane fade" id="about">
+                {% include 'dashboard/about.html' %}
+            </div>
+            {% if user.username == 'cole' %}
+            <div class="tab-pane fade" id="membership">
+                {% include 'dashboard/membership.html' %}
+            </div>
+            {% else %}
+            <div class="tab-pane fade" id="directory">
+                {% include 'dashboard/directory.html' %}
+            </div>
+            {% endif %}
+            <div class="tab-pane fade" id="soberbros">
+                {% include 'dashboard/soberbros.html' %}
+            </div>
+            <div class="tab-pane fade" id="FAQ">
+                {% include 'dashboard/faq.html' %}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% include 'dashboard/footer.html' %}
+</body>
+</html>
